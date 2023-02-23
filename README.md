@@ -1,17 +1,17 @@
 # routing_poc
 
-A new Flutter project.
+go_router Routing POC for flutter web
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+POC for redirection in go_router is done by this we fixed :
+> user was able to access public routes even after login and was able to access secure routes without login ,
+> even after logout on browser back button user was able to access secure routes
+> there are some sensitive routes which we only wants to open after a specific screen like OTP page but user was able to access otp page by forword button of browser.
+> disable opening secure routes manually by entering in address bar of browser and same for public routes when user is already logged.
+> like this there are more functionality issues we were facing because go_router does not support Navigator.removeRoute , Navigator.popUntil , Navigator.pushAndRemoveUntil , Navigator.replace.
+we are using go_router because it enable us to use Material.router widget in declarative way.
+so in order to fix above issues we have divided our routes in public and secure types and configured global redirection policy which can listen to global auth service.
+* this implementation also supports deeplinking. ex. user clicks on secure routes (https://domain.com/secure/myprofile) but before that we need to authenticate the user and the redirect to the required route.
+* go_router also support individual route redirection, as of now number of redirection limit per route is 5.
 
-** High Level Architecture Overview **
-> Each view will have it's own model that extends the ChangeNotifier.
-> Notify listeners for a view will ONLY BE CALLED when the View's state changes.
-> Each view only has 2 states. Idle and Busy. Any other piece of UI contained in a view, that requires logic and state / UI updates will have it's own model associated with it. This way the main view only paints when the main view state changes.
-> Providers will NOT be passed in through app level global provider, unless it's required by more than 1 view in the app architecture (Users information).
-> Providers and services will be injected using get_it.
-> Models will ONLY request data from Services and reduce state from that DATA. Nothing else.
-> Dedicated Services(Just normal objects, to not confuse beginners) will perform all the actual work. Api class will request and serialize data. The model will just call the function to do that. Authentication service will use the Api to get the user details and track it. The model just calls the function and passes values to it.
-> That's it on a high level. Keeping that in mind as we progress.
