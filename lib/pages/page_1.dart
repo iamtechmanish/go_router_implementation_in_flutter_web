@@ -20,13 +20,7 @@ class _SplashState extends State<Splash> {
         title: const Text("Page 1"),
       ),
       body: Center(
-        child: ElevatedButton(
-          onPressed: (){
-            storage.write("TITLE_PAGE_2", "PAGE 2 From Storage");
-            context.goNamed("page2", );
-          },
-            child: Text("Go to page 2"),
-        ),
+       child: Text("Splash Screen"),
       ),
     );
   }
@@ -34,13 +28,12 @@ class _SplashState extends State<Splash> {
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      print("mai chla");
-      // if(storage.read("IS_LOGIN").toString()=="true"){
-      //   context.goNamed("home");
-      // }
-      // else {
-      //   context.goNamed("login");
-      // }
+      if(storage.read("IS_LOGIN").toString()=="true"){
+        context.goNamed("home");
+      }
+      else {
+        context.goNamed("login");
+      }
 
 
     });
