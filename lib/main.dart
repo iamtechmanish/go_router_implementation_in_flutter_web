@@ -61,7 +61,10 @@ class MyApp extends StatelessWidget {
           },),
       GoRoute(
           path: '/public',
-          builder: (context, state) =>  Container(),
+          builder: (context, state) {
+            // this will be called every time when we open any public route (initsate method will be executed of returning statefull widget)
+            return Container();
+  },
           redirect: (context, state) {
             if(state.location == '/public'){
             return   '/public/login' ;
