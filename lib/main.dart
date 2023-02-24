@@ -3,11 +3,11 @@ import 'package:get_storage/get_storage.dart';
 import 'package:routing_poc/router/go_router.dart';
 import 'package:url_strategy/url_strategy.dart';
 
-final storage = GetStorage();
+final storage = GetStorage("TEST");
 
 void main() async {
   setPathUrlStrategy();
-  await GetStorage.init();
+  await GetStorage.init("TEST");
   runApp(MyApp());
 }
 

@@ -6,6 +6,8 @@ FutureOr<String?> appRedirections(context, state){
 
   /// we define the path and redirect directives
   /// see the logic redirect
+
+  print(storage.read("IS_LOGIN").toString());
   final bool userAuthenticated = storage.read("IS_LOGIN").toString()=="true";
   final bool onPublicPages = state.location.contains("/public");
   final bool onSecurePages = state.location.contains("/secure");
@@ -21,8 +23,12 @@ FutureOr<String?> appRedirections(context, state){
 
   }
   if (userAuthenticated && onPublicPages) {
+
     return '/secure/home';
   }
+
+  print(userAuthenticated.toString() + "  " + onPublicPages.toString());
+  print(state.location);
   //you must include this. so if condition not meet, there is no redirect
   return null;
 }
